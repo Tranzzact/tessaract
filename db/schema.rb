@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_101544) do
+ActiveRecord::Schema.define(version: 2021_09_13_001908) do
 
   create_table "stock_exchanges", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,28 @@ ActiveRecord::Schema.define(version: 2021_09_12_101544) do
     t.string "service_api"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ticker_eods", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.decimal "open", precision: 15, scale: 4, null: false
+    t.decimal "high", precision: 15, scale: 4, null: false
+    t.decimal "low", precision: 15, scale: 4, null: false
+    t.decimal "close", precision: 15, scale: 4, null: false
+    t.decimal "volume", precision: 15, scale: 4, null: false
+    t.decimal "adj_high", precision: 15, scale: 4
+    t.decimal "adj_low", precision: 15, scale: 4
+    t.decimal "adj_close", precision: 15, scale: 4, null: false
+    t.decimal "adj_open", precision: 15, scale: 4
+    t.decimal "adj_volume", precision: 15, scale: 4
+    t.decimal "split_factor", precision: 15, scale: 4, null: false
+    t.string "symbol", null: false
+    t.bigint "ticker_id"
+    t.bigint "stock_exchange_id"
+    t.datetime "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_exchange_id"], name: "index_ticker_eods_on_stock_exchange_id"
+    t.index ["ticker_id"], name: "index_ticker_eods_on_ticker_id"
   end
 
   create_table "tickers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
