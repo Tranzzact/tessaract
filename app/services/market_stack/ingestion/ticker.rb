@@ -7,8 +7,8 @@ module MarketStack
         @ticker_data = []
         @offset = 0
         @api_counter = 1
-        # @pagination_total = 0
-        @pagination_total = 180502
+        @pagination_total = 0
+        # @pagination_total = 180502
       end
 
       def fetch_and_save_ticker(dry_run: !Rails.env.production?)
@@ -21,7 +21,7 @@ module MarketStack
               opts: {limit: API_OBJ_LIMIT, offset: @offset}
             )
           end
-          byebug
+
           @api_counter += 1
           break if resp.blank?
           @ticker_data += resp['data']
